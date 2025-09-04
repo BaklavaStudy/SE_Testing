@@ -1,0 +1,12 @@
+{
+    "java.project.sourcePaths": [
+        "."
+    ],
+    "java.project.referencedLibraries": [
+        "c:\\Users\\Eclip\\Downloads\\junit-jupiter-api-5.9.0.jar",
+        "c:\\Users\\Eclip\\Downloads\\junit-jupiter-engine-5.9.0.jar",
+        "c:\\Users\\Eclip\\Downloads\\hamcrest-core-1.3.jar",
+        "c:\\Users\\Eclip\\Downloads\\junit-4.13.2.jar"
+    ],
+    "java.debug.settings.onBuildFailureProceed": true
+}
