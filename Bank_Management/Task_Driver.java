@@ -1,6 +1,6 @@
 // This code has been taken from public project on Github.
 //https://github.com/Adan-Asim/Java-Projects/tree/main/Bank%20Management%20System
-
+package Bank_Management;
 import java.util.*;
 import java.io.*;
 
