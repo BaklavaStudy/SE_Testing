@@ -8,8 +8,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.InputMismatchException;
 
 
@@ -46,7 +44,7 @@ public class TestJunit {
                 assertEquals(1000, invalidInputAccount.getAmount(), 0)
         );
     }
-    
+
     @Test
     public void FailedAccount() {
         // False positive checker.
@@ -57,7 +55,7 @@ public class TestJunit {
         assertNotEquals("6754", account.getPIN());
         assertNotEquals(2000, account.getAmount(), 0);
 
-        
+
         // Checking for obscure values (negatives & nulls)
         Account account1 = new Account("  Riley        ", 1, "", -2000);
         assertNotEquals("Riley", account1.getName());
