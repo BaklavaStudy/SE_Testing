@@ -2,6 +2,7 @@
 //import com.inflectra.spiratest.addons.junitextension.SpiraTestConfiguration;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -57,16 +58,19 @@ public class SeleniumTest {
         }
     }
 
-    // This test fails because it doesn't correctly click the laptop link. I'm not sure why.
+    // This test only passes if i add a thread.sleep. Otherwise doesn't correctly load the expectedPhones selection
     @Test
-    @Order(2)
-    @DisplayName("2. Laptop Category testing")
-    public void laptopCategories() throws InterruptedException {
-        String[] laptops = {"Sony vaio i5", "Sony vaio i7", "MacBook air", "Dell i7 8gb", "2017 Dell 15.6 Inch", "MacBook Pro"};
+    @Order(5)
+    @DisplayName("5. Laptop Category testing")
+    public void laptopCategoriesOG() throws InterruptedException {
 
         wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Laptops"))).click();
-        wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Sony vaio i5")));
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".card-title")));
+
+        Thread.sleep(2000); // Legit doesn't work with an explicit wait. Every time I tried it would just go overtime, ;/
+
+        String[] laptops = {"Sony vaio i5", "Sony vaio i7", "MacBook air",
+                "Dell i7 8gb", "2017 Dell 15.6 Inch", "MacBook Pro"};
+
 
         boolean match = true; // Should remain true as we want all laptop and gallery items to match.
         List<WebElement> items = driver.findElements(By.cssSelector(".card-title a")); // Get all listing titles
@@ -82,12 +86,58 @@ public class SeleniumTest {
         Assertions.assertTrue(match);
     }
 
-}
+    @Test
+    @Order(3)
+    @DisplayName("3. Phone Category testing")
+    public void phoneCategory() throws InterruptedException {
 
-//        driver.get("https://www.google.com");
-//        driver.manage().window().maximize();
-//        WebElement element = driver.findElement(By.name("q"));
-//        element.sendKeys("Fortnite");
-//        element.submit();
-//        Thread.sleep(3000);
-//        driver.close();
+        wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Phones"))).click();
+
+        Thread.sleep(2000); // Legit doesn't work with an explicit wait. Every time I tried it would just go overtime, ;/
+
+        String[] expectedPhones = {
+                "Samsung galaxy s6", "Nokia lumia 1520", "Nexus 6",
+                "Samsung galaxy s7", "Iphone 6 32gb", "Sony xperia z5", "HTC One M9"
+        };
+
+
+        boolean match = true; // Should remain true as we want all laptop and gallery items to match.
+        List<WebElement> items = driver.findElements(By.cssSelector(".card-title a")); // Get all listing titles
+
+        for (int i=0; i < expectedPhones.length; i++) {
+            System.out.println("Laptop at " + i + ": " + expectedPhones[i]);
+            System.out.println("Catalogue item at " + i + ": " + items.get(i).getText());
+            if (!expectedPhones[i].equals(items.get(i).getText())) {
+                match = false;
+                break;
+            }
+        }
+        Assertions.assertTrue(match);
+    }
+
+
+    @Test
+    @Order(5)
+    @DisplayName("5. Monitor Category testing")
+    public void monitorCategory() throws InterruptedException {
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Monitors"))).click();
+
+        Thread.sleep(2000); // Legit doesn't work with an explicit wait. Every time I tried it would just go overtime, ;/
+
+        String[] monitors = {"Apple monitor 24", "ASUS Full HD"};
+
+        boolean match = true; // Should remain true as we want all laptop and gallery items to match.
+        List<WebElement> items = driver.findElements(By.cssSelector(".card-title a")); // Get all listing titles
+
+        for (int i=0; i < monitors.length; i++) {
+            System.out.println("Monitor at " + i + ": " + monitors[i]);
+            System.out.println("Catalogue item at " + i + ": " + items.get(i).getText());
+            if (!monitors[i].equals(items.get(i).getText())) {
+                match = false;
+                break;
+            }
+        }
+        Assertions.assertTrue(match);
+    }
+}
