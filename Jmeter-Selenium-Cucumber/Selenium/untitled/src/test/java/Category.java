@@ -1,5 +1,5 @@
-//import com.inflectra.spiratest.addons.junitextension.SpiraTestCase;
-//import com.inflectra.spiratest.addons.junitextension.SpiraTestConfiguration;
+import com.inflectra.spiratest.addons.junitextension.SpiraTestCase;
+import com.inflectra.spiratest.addons.junitextension.SpiraTestConfiguration;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -9,9 +9,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+@SpiraTestConfiguration(
+    url = "https://rmit.spiraservice.net/",
+    login = "s4005276",
+    rssToken = "{70C6A183-7D62-4DD3-9BD3-07FFB013954C}",
+    projectId = 706,
+    releaseId = 2520,
+    testSetId = 5622
+)
 
 public class Category {
 
@@ -39,8 +44,10 @@ public class Category {
         }
     }
 
+
     @Test
     @Order(1)
+    @SpiraTestCase(testCaseId = 44476)
     @DisplayName("1. All Category testing")
     public void allCategories() throws InterruptedException {
         String[] categories = {"Phones", "Laptops", "Monitors"};
@@ -56,8 +63,9 @@ public class Category {
 
     // This test only passes if i add a thread.sleep. Otherwise doesn't correctly load the expectedPhones selection
     @Test
-    @Order(5)
-    @DisplayName("5. Laptop Category testing")
+    @Order(2)
+    @SpiraTestCase(testCaseId = 44477)
+    @DisplayName("2. Laptop Category testing")
     public void laptopCategoriesOG() throws InterruptedException {
 
         wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Laptops"))).click();
@@ -84,6 +92,7 @@ public class Category {
 
     @Test
     @Order(3)
+    @SpiraTestCase(testCaseId = 44478)
     @DisplayName("3. Phone Category testing")
     public void phoneCategory() throws InterruptedException {
 
@@ -113,8 +122,9 @@ public class Category {
 
 
     @Test
-    @Order(5)
-    @DisplayName("5. Monitor Category testing")
+    @Order(4)
+    @SpiraTestCase(testCaseId = 44479)
+    @DisplayName("4. Monitor Category testing")
     public void monitorCategory() throws InterruptedException {
 
         wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Monitors"))).click();

@@ -1,5 +1,5 @@
-//import com.inflectra.spiratest.addons.junitextension.SpiraTestCase;
-//import com.inflectra.spiratest.addons.junitextension.SpiraTestConfiguration;
+import com.inflectra.spiratest.addons.junitextension.SpiraTestCase;
+import com.inflectra.spiratest.addons.junitextension.SpiraTestConfiguration;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -15,6 +15,15 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@SpiraTestConfiguration(
+    url = "https://rmit.spiraservice.net/",
+    login = "s4005276",
+    rssToken = "{70C6A183-7D62-4DD3-9BD3-07FFB013954C}",
+    projectId = 706,
+    releaseId = 2520,
+    testSetId = 5624
+)
+
 public class Login_Signup {
 
     private static ChromeDriver driver;
@@ -22,6 +31,7 @@ public class Login_Signup {
 
     private static String email;
     private static String password;
+
 
     @BeforeAll
     public static void setup() {
@@ -46,6 +56,7 @@ public class Login_Signup {
 
     @Test
     @Order(1)
+    @SpiraTestCase(testCaseId = 44471)
     @DisplayName("1. Sign up")
     public void signup() {
 
@@ -81,6 +92,7 @@ public class Login_Signup {
 
     @Test
     @Order(2)
+    @SpiraTestCase(testCaseId = 44472)
     @DisplayName("2. Login")
     public void login() {
         wait.until(ExpectedConditions.

@@ -1,3 +1,5 @@
+import com.inflectra.spiratest.addons.junitextension.SpiraTestCase;
+import com.inflectra.spiratest.addons.junitextension.SpiraTestConfiguration;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -6,6 +8,16 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+
+@SpiraTestConfiguration(
+    url = "https://rmit.spiraservice.net/",
+    login = "s4005276",
+    rssToken = "{70C6A183-7D62-4DD3-9BD3-07FFB013954C}",
+    projectId = 706,
+    releaseId = 2520,
+    testSetId = 5621
+)
+
 
 public class CartTest {
     private static ChromeDriver driver;
@@ -34,6 +46,7 @@ public class CartTest {
 
     @Test
     @Order(1)
+    @SpiraTestCase(testCaseId = 44469)
     @DisplayName("1. Add item to cart test")
     public void addItemToCart() {
         wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Laptops"))).click();
@@ -55,6 +68,7 @@ public class CartTest {
 
     @Test
     @Order(2)
+    @SpiraTestCase(testCaseId = 44470)
     @DisplayName("2. Place order test")
     public void placeOrderTest() {
         wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Cart"))).click();
@@ -73,5 +87,7 @@ public class CartTest {
         // Verify success message
         WebElement confirmMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".sweet-alert")));
         Assertions.assertTrue(confirmMsg.getText().contains("Thank you"), "Order confirmation not found!");
+        driver.findElement(By.xpath("/html/body/div[10]/div[7]/div/button")).click();
+        driver.get("https://demoblaze.com/index.html#"); // For some stupid reason doing this in before all and after all doesn't work here. Very unreliable :/
     }
 }

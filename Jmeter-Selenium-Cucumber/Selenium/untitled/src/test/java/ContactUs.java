@@ -6,7 +6,19 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.inflectra.spiratest.addons.junitextension.SpiraTestConfiguration;
+import com.inflectra.spiratest.addons.junitextension.SpiraTestCase;
+
 import java.time.Duration;
+
+@SpiraTestConfiguration(
+    url = "https://rmit.spiraservice.net/",
+    login = "s4005276",
+    rssToken = "{70C6A183-7D62-4DD3-9BD3-07FFB013954C}",
+    projectId = 706,
+    releaseId = 2520,
+    testSetId = 5623
+)
 
 public class ContactUs {
     private static ChromeDriver driver;
@@ -35,7 +47,8 @@ public class ContactUs {
 
     @Test
     @Order(1)
-    @DisplayName("1. Verify Contact modal opens and can send a message")
+    @SpiraTestCase(testCaseId = 44473)
+    @DisplayName("1. Test contact form")
     public void testContactForm() {
         WebElement contactButton = wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Contact")));
         contactButton.click();
@@ -48,7 +61,6 @@ public class ContactUs {
 
         driver.findElement(By.xpath("//button[text()='Send message']")).click();
 
-        // Expect an alert confirmation
         wait.until(ExpectedConditions.alertIsPresent());
         String alertText = driver.switchTo().alert().getText();
         driver.switchTo().alert().accept();
@@ -64,7 +76,8 @@ public class ContactUs {
     // Works just need to fidget with the clicking x button.
     @Test
     @Order(2)
-    @DisplayName("2. Verify About Us video plays and can go fullscreen")
+    @SpiraTestCase(testCaseId = 44474)
+    @DisplayName("2. Test about us video")
     public void testAboutUsVideo() throws InterruptedException {
         WebElement aboutUsButton = wait.until(ExpectedConditions.elementToBeClickable(By.linkText("About us")));
         aboutUsButton.click();
@@ -87,7 +100,7 @@ public class ContactUs {
         js.executeScript("if (document.exitFullscreen) document.exitFullscreen();");
 
         // Need to work on this. Doesn't work right now.
-        driver.findElement(By.xpath("//button[@class='btn btn-secondary' and text()='Close']")).click();
+        driver.findElement(By.xpath("//*[@id='videoModal']/div/div/div[1]/button/span")).click();
 
         System.out.println("About Us video played and fullscreen worked.");
     }
