@@ -18,7 +18,7 @@ public class ContactUs {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
 
-        //idk what these do but intellij autocomplete told me to put them.
+        // Hard cap so tests dont wait forever.
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 

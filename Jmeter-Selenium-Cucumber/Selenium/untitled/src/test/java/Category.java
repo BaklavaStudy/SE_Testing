@@ -2,13 +2,9 @@
 //import com.inflectra.spiratest.addons.junitextension.SpiraTestConfiguration;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
@@ -17,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class SeleniumTest {
+public class Category {
 
     private static ChromeDriver driver;
     private static WebDriverWait wait;
@@ -28,7 +24,7 @@ public class SeleniumTest {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
 
-        //idk what these do but intellij autocomplete told me to put them.
+        // Hard cap so tests dont wait forever.
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 

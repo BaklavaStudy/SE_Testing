@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class CartTest {
-    //Globals for b4/after all
     private static ChromeDriver driver;
     private static WebDriverWait wait;
 
@@ -18,7 +17,7 @@ public class CartTest {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
 
-        //idk what these do but intellij autocomplete told me to put them.
+        // Hard cap so tests dont wait forever.
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
@@ -39,14 +38,13 @@ public class CartTest {
     public void addItemToCart() {
         wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Laptops"))).click();
         wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Sony vaio i5"))).click();
-
         wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Add to cart"))).click();
 
-        // Wait for alert and accept it
+        // Wait for are you sure message
         wait.until(ExpectedConditions.alertIsPresent());
         driver.switchTo().alert().accept();
 
-        driver.navigate().back(); // back to homepage
+        driver.navigate().back();
         wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Cart"))).click();
 
         boolean itemPresent = wait.until(ExpectedConditions
