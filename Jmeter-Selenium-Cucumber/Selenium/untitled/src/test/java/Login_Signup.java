@@ -32,7 +32,6 @@ public class Login_Signup {
     private static String email;
     private static String password;
 
-
     @BeforeAll
     public static void setup() {
         System.setProperty("webdriver.chrome.driver", "C:\\Code\\SE_Testing\\BrowserDriver\\chromedriver-win64\\chromedriver.exe");
